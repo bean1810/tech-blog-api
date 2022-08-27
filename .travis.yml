@@ -19,8 +19,7 @@ before_script:
   - psql -c "CREATE USER postgres_test WITH PASSWORD null;" -U postgres
   - npm run build
   - npm install -g sequelize-cli
-  - sequelize db:migrate:undo:all
-  - sequelize db:migrate
+  - npm run migrate-test
 script:
   - npm test
 after_success:
