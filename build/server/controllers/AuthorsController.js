@@ -165,19 +165,17 @@ var AuthorController = /*#__PURE__*/function () {
       return addAuthor;
     }()
   }, {
-    key: "updatedAuthor",
+    key: "updateAuthor",
     value: function () {
-      var _updatedAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-        var alteredAuthor, _ref, id, updateAuthor;
+      var _updateAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+        var alteredAuthor, id, _updateAuthor2;
 
         return _regenerator["default"].wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 alteredAuthor = req.body;
-                _ref = !_ObjectUtils["default"].isEmpty(req.params) ? req.params : {
-                  id: req.body.author_id
-                }, id = _ref.id;
+                id = req.body.author_id;
 
                 if (Number(id)) {
                   _context4.next = 5;
@@ -193,14 +191,8 @@ var AuthorController = /*#__PURE__*/function () {
                 return _AuthorsService["default"].updateAuthor(id, alteredAuthor);
 
               case 8:
-                updateAuthor = _context4.sent;
-
-                if (!updateAuthor) {
-                  responseUtils.setError(404, "Cannot find Author with the author_id: ".concat(id));
-                } else {
-                  responseUtils.setSuccess(200, 'Author updated', updateAuthor);
-                }
-
+                _updateAuthor2 = _context4.sent;
+                responseUtils.setSuccess(200, 'Author updated', _updateAuthor2);
                 return _context4.abrupt("return", responseUtils.send(res));
 
               case 13:
@@ -217,72 +209,76 @@ var AuthorController = /*#__PURE__*/function () {
         }, _callee4, null, [[5, 13]]);
       }));
 
-      function updatedAuthor(_x7, _x8) {
-        return _updatedAuthor.apply(this, arguments);
+      function updateAuthor(_x7, _x8) {
+        return _updateAuthor.apply(this, arguments);
       }
 
-      return updatedAuthor;
+      return updateAuthor;
     }()
   }, {
-    key: "getAAuthor",
+    key: "fincAuthorToUpdate",
     value: function () {
-      var _getAAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-        var id, theAuthor;
+      var _fincAuthorToUpdate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+        var alteredAuthor, _ref, id, updateAuthor;
+
         return _regenerator["default"].wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                id = req.params.id;
+                alteredAuthor = req.body;
+                _ref = !_ObjectUtils["default"].isEmpty(req.params) ? req.params : {
+                  id: req.body.author_id
+                }, id = _ref.id;
 
                 if (Number(id)) {
-                  _context5.next = 4;
+                  _context5.next = 5;
                   break;
                 }
 
                 responseUtils.setError(400, 'Please input a valid numeric value');
                 return _context5.abrupt("return", responseUtils.send(res));
 
-              case 4:
-                _context5.prev = 4;
-                _context5.next = 7;
-                return _AuthorsService["default"].getOneAuthor(id);
+              case 5:
+                _context5.prev = 5;
+                _context5.next = 8;
+                return _AuthorsService["default"].findAuthorToUpdate(id, alteredAuthor);
 
-              case 7:
-                theAuthor = _context5.sent;
+              case 8:
+                updateAuthor = _context5.sent;
 
-                if (!theAuthor) {
-                  responseUtils.setError(404, "Cannot find Author with the author_id ".concat(id));
+                if (!updateAuthor) {
+                  responseUtils.setError(404, "Cannot find Author with the author_id: ".concat(id));
                 } else {
-                  responseUtils.setSuccess(200, 'Found Author', theAuthor);
+                  responseUtils.setSuccess(200, 'Author updated', updateAuthor);
                 }
 
                 return _context5.abrupt("return", responseUtils.send(res));
 
-              case 12:
-                _context5.prev = 12;
-                _context5.t0 = _context5["catch"](4);
+              case 13:
+                _context5.prev = 13;
+                _context5.t0 = _context5["catch"](5);
                 responseUtils.setError(404, _context5.t0);
                 return _context5.abrupt("return", responseUtils.send(res));
 
-              case 16:
+              case 17:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[4, 12]]);
+        }, _callee5, null, [[5, 13]]);
       }));
 
-      function getAAuthor(_x9, _x10) {
-        return _getAAuthor.apply(this, arguments);
+      function fincAuthorToUpdate(_x9, _x10) {
+        return _fincAuthorToUpdate.apply(this, arguments);
       }
 
-      return getAAuthor;
+      return fincAuthorToUpdate;
     }()
   }, {
-    key: "deleteAuthor",
+    key: "getAAuthor",
     value: function () {
-      var _deleteAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-        var id, authorToDelete;
+      var _getAAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+        var id, theAuthor;
         return _regenerator["default"].wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
@@ -294,21 +290,21 @@ var AuthorController = /*#__PURE__*/function () {
                   break;
                 }
 
-                responseUtils.setError(400, 'Please provide a numeric value');
+                responseUtils.setError(400, 'Please input a valid numeric value');
                 return _context6.abrupt("return", responseUtils.send(res));
 
               case 4:
                 _context6.prev = 4;
                 _context6.next = 7;
-                return _AuthorsService["default"].deleteAuthor(id);
+                return _AuthorsService["default"].getOneAuthor(id);
 
               case 7:
-                authorToDelete = _context6.sent;
+                theAuthor = _context6.sent;
 
-                if (authorToDelete) {
-                  responseUtils.setSuccess(200, 'Author deleted');
+                if (!theAuthor) {
+                  responseUtils.setError(404, "Cannot find Author with the author_id ".concat(id));
                 } else {
-                  responseUtils.setError(404, "Author with the author_id ".concat(id, " cannot be found"));
+                  responseUtils.setSuccess(200, 'Found Author', theAuthor);
                 }
 
                 return _context6.abrupt("return", responseUtils.send(res));
@@ -316,7 +312,7 @@ var AuthorController = /*#__PURE__*/function () {
               case 12:
                 _context6.prev = 12;
                 _context6.t0 = _context6["catch"](4);
-                responseUtils.setError(400, _context6.t0);
+                responseUtils.setError(404, _context6.t0);
                 return _context6.abrupt("return", responseUtils.send(res));
 
               case 16:
@@ -327,7 +323,62 @@ var AuthorController = /*#__PURE__*/function () {
         }, _callee6, null, [[4, 12]]);
       }));
 
-      function deleteAuthor(_x11, _x12) {
+      function getAAuthor(_x11, _x12) {
+        return _getAAuthor.apply(this, arguments);
+      }
+
+      return getAAuthor;
+    }()
+  }, {
+    key: "deleteAuthor",
+    value: function () {
+      var _deleteAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+        var id, authorToDelete;
+        return _regenerator["default"].wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                id = req.params.id;
+
+                if (Number(id)) {
+                  _context7.next = 4;
+                  break;
+                }
+
+                responseUtils.setError(400, 'Please provide a numeric value');
+                return _context7.abrupt("return", responseUtils.send(res));
+
+              case 4:
+                _context7.prev = 4;
+                _context7.next = 7;
+                return _AuthorsService["default"].deleteAuthor(id);
+
+              case 7:
+                authorToDelete = _context7.sent;
+
+                if (authorToDelete) {
+                  responseUtils.setSuccess(200, 'Author deleted');
+                } else {
+                  responseUtils.setError(404, "Author with the author_id ".concat(id, " cannot be found"));
+                }
+
+                return _context7.abrupt("return", responseUtils.send(res));
+
+              case 12:
+                _context7.prev = 12;
+                _context7.t0 = _context7["catch"](4);
+                responseUtils.setError(400, _context7.t0);
+                return _context7.abrupt("return", responseUtils.send(res));
+
+              case 16:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[4, 12]]);
+      }));
+
+      function deleteAuthor(_x13, _x14) {
         return _deleteAuthor.apply(this, arguments);
       }
 

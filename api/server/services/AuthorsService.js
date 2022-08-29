@@ -17,18 +17,26 @@ class AuthorsService {
         }
     }
 
-    static async updateAuthor(id, updateAuthor) {
+    static async findAuthorToUpdate(id, updateAuthor) {
         try {
             const authorToUpdate = await database.Authors.findOne({
                 where: { author_id: Number(id) }
             });
 
             if (authorToUpdate) {
-                await database.Authors.update(updateAuthor, { where: { author_id: Number(id) } });
-
-                return updateAuthor;
+                AuthorsService.updateAuthor(id, updateAuthor);
             }
             return null;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async updateAuthor(id, updateAuthor) {
+        try {
+            await database.Authors.update(updateAuthor, { where: { author_id: Number(id) } });
+
+            return updateAuthor;
         } catch (error) {
             throw error;
         }

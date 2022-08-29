@@ -9,7 +9,7 @@ module.exports = {
     // },
 
     development: {
-        database: 'beanBlogDB',
+        database: 'bean_blog_db',
         username: 'postgres',
         password: 'dung10',
         host: '127.0.0.1',
@@ -17,9 +17,9 @@ module.exports = {
     },
 
     test: {
-        database: 'bean_blog_db_test',
-        username: 'postgres_test',
-        password: null,
+        database: 'bean_blog_db',
+        username: 'postgres',
+        password: 'dung10',
         host: '127.0.0.1',
         dialect: 'postgres'
     },

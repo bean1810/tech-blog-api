@@ -91,9 +91,9 @@ var AuthorsService = /*#__PURE__*/function () {
       return addAuthor;
     }()
   }, {
-    key: "updateAuthor",
+    key: "findAuthorToUpdate",
     value: function () {
-      var _updateAuthor2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(id, _updateAuthor) {
+      var _findAuthorToUpdate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(id, updateAuthor) {
         var authorToUpdate;
         return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
@@ -110,38 +110,64 @@ var AuthorsService = /*#__PURE__*/function () {
               case 3:
                 authorToUpdate = _context3.sent;
 
-                if (!authorToUpdate) {
-                  _context3.next = 8;
-                  break;
+                if (authorToUpdate) {
+                  AuthorsService.updateAuthor(id, updateAuthor);
                 }
 
-                _context3.next = 7;
+                return _context3.abrupt("return", null);
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                throw _context3.t0;
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 8]]);
+      }));
+
+      function findAuthorToUpdate(_x2, _x3) {
+        return _findAuthorToUpdate.apply(this, arguments);
+      }
+
+      return findAuthorToUpdate;
+    }()
+  }, {
+    key: "updateAuthor",
+    value: function () {
+      var _updateAuthor2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(id, _updateAuthor) {
+        return _regenerator["default"].wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
                 return _models["default"].Authors.update(_updateAuthor, {
                   where: {
                     author_id: Number(id)
                   }
                 });
 
-              case 7:
-                return _context3.abrupt("return", _updateAuthor);
+              case 3:
+                return _context4.abrupt("return", _updateAuthor);
 
-              case 8:
-                return _context3.abrupt("return", null);
+              case 6:
+                _context4.prev = 6;
+                _context4.t0 = _context4["catch"](0);
+                throw _context4.t0;
 
-              case 11:
-                _context3.prev = 11;
-                _context3.t0 = _context3["catch"](0);
-                throw _context3.t0;
-
-              case 14:
+              case 9:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, null, [[0, 11]]);
+        }, _callee4, null, [[0, 6]]);
       }));
 
-      function updateAuthor(_x2, _x3) {
+      function updateAuthor(_x4, _x5) {
         return _updateAuthor2.apply(this, arguments);
       }
 
@@ -150,48 +176,8 @@ var AuthorsService = /*#__PURE__*/function () {
   }, {
     key: "getOneAuthor",
     value: function () {
-      var _getOneAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(id) {
+      var _getOneAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(id) {
         var theAuthor;
-        return _regenerator["default"].wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.prev = 0;
-                _context4.next = 3;
-                return _models["default"].Authors.findOne({
-                  where: {
-                    author_id: Number(id)
-                  }
-                });
-
-              case 3:
-                theAuthor = _context4.sent;
-                return _context4.abrupt("return", theAuthor);
-
-              case 7:
-                _context4.prev = 7;
-                _context4.t0 = _context4["catch"](0);
-                throw _context4.t0;
-
-              case 10:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, null, [[0, 7]]);
-      }));
-
-      function getOneAuthor(_x4) {
-        return _getOneAuthor.apply(this, arguments);
-      }
-
-      return getOneAuthor;
-    }()
-  }, {
-    key: "deleteAuthor",
-    value: function () {
-      var _deleteAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(id) {
-        var authorToDelete, deletedAuthor;
         return _regenerator["default"].wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -205,14 +191,54 @@ var AuthorsService = /*#__PURE__*/function () {
                 });
 
               case 3:
-                authorToDelete = _context5.sent;
+                theAuthor = _context5.sent;
+                return _context5.abrupt("return", theAuthor);
+
+              case 7:
+                _context5.prev = 7;
+                _context5.t0 = _context5["catch"](0);
+                throw _context5.t0;
+
+              case 10:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 7]]);
+      }));
+
+      function getOneAuthor(_x6) {
+        return _getOneAuthor.apply(this, arguments);
+      }
+
+      return getOneAuthor;
+    }()
+  }, {
+    key: "deleteAuthor",
+    value: function () {
+      var _deleteAuthor = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(id) {
+        var authorToDelete, deletedAuthor;
+        return _regenerator["default"].wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                _context6.next = 3;
+                return _models["default"].Authors.findOne({
+                  where: {
+                    author_id: Number(id)
+                  }
+                });
+
+              case 3:
+                authorToDelete = _context6.sent;
 
                 if (!authorToDelete) {
-                  _context5.next = 9;
+                  _context6.next = 9;
                   break;
                 }
 
-                _context5.next = 7;
+                _context6.next = 7;
                 return _models["default"].Authors.destroy({
                   where: {
                     author_id: Number(id)
@@ -220,26 +246,26 @@ var AuthorsService = /*#__PURE__*/function () {
                 });
 
               case 7:
-                deletedAuthor = _context5.sent;
-                return _context5.abrupt("return", deletedAuthor);
+                deletedAuthor = _context6.sent;
+                return _context6.abrupt("return", deletedAuthor);
 
               case 9:
-                return _context5.abrupt("return", null);
+                return _context6.abrupt("return", null);
 
               case 12:
-                _context5.prev = 12;
-                _context5.t0 = _context5["catch"](0);
-                throw _context5.t0;
+                _context6.prev = 12;
+                _context6.t0 = _context6["catch"](0);
+                throw _context6.t0;
 
               case 15:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, null, [[0, 12]]);
+        }, _callee6, null, [[0, 12]]);
       }));
 
-      function deleteAuthor(_x5) {
+      function deleteAuthor(_x7) {
         return _deleteAuthor.apply(this, arguments);
       }
 

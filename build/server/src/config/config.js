@@ -8,14 +8,14 @@ module.exports = {
   //   use_env_variable: 'DATABASE_URL'
   // },
   development: {
-    database: 'beanBlogDB',
+    database: 'bean_blog_db',
     username: 'postgres',
     password: 'dung10',
     host: '127.0.0.1',
     dialect: 'postgres'
   },
   test: {
-    database: 'beanBlogDB_test',
+    database: 'bean_blog_db',
     username: 'postgres',
     password: 'dung10',
     host: '127.0.0.1',

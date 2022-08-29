@@ -25,19 +25,21 @@ class AuthorController {
             responseUtils.setError(400, 'Please provide complete details');
             return responseUtils.send(res);
         }
-        const isAuthorExist = await AuthorsService.getOneAuthor(req.body.author_id);
-        if (isAuthorExist) {
-            AuthorController.updatedAuthor(req, res);
-        } else {
-            AuthorController.addAuthor(req, res);
+        try {
+            const isAuthorExist = await AuthorsService.getOneAuthor(req.body.author_id);
+            if (isAuthorExist) {
+                AuthorController.updateAuthor(req, res);
+            } else {
+                AuthorController.addAuthor(req, res);
+            }
+        } catch (error) {
+            responseUtils.setError(400, error.message);
+            return responseUtils.send(res);
         }
+
     }
 
     static async addAuthor(req, res) {
-        if (!ObjectUtils.isObjectNotEmpty(req.body)) {
-            responseUtils.setError(400, 'Please provide complete details');
-            return responseUtils.send(res);
-        }
         const newAuthor = req.body;
         try {
             const createdAuthor = await AuthorsService.addAuthor(newAuthor);
@@ -49,7 +51,20 @@ class AuthorController {
         }
     }
 
-    static async updatedAuthor(req, res) {
+    static async updateAuthor(req, res) {
+        const alteredAuthor = req.body;
+        const id = req.body.author_id;
+        try {
+            const updateAuthor = await AuthorsService.updateAuthor(id, alteredAuthor);
+            responseUtils.setSuccess(200, 'Author updated', updateAuthor);
+            return responseUtils.send(res);
+        } catch (error) {
+            responseUtils.setError(404, error);
+            return responseUtils.send(res);
+        }
+    }
+
+    static async fincAuthorToUpdate(req, res) {
         const alteredAuthor = req.body;
         const { id } = !ObjectUtils.isEmpty(req.params) ? req.params : { id: req.body.author_id };
         if (!Number(id)) {
@@ -57,7 +72,7 @@ class AuthorController {
             return responseUtils.send(res);
         }
         try {
-            const updateAuthor = await AuthorsService.updateAuthor(id, alteredAuthor);
+            const updateAuthor = await AuthorsService.findAuthorToUpdate(id, alteredAuthor);
             if (!updateAuthor) {
                 responseUtils.setError(404, `Cannot find Author with the author_id: ${id}`);
             } else {
