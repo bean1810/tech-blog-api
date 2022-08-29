@@ -17,7 +17,7 @@ module.exports = {
     },
 
     test: {
-        database: 'beanBlogDB_test',
+        database: 'bean_blog_db_test',
         username: 'postgres',
         password: 'dung10',
         host: '127.0.0.1',
