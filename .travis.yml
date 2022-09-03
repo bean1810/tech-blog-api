@@ -28,7 +28,7 @@ script:
 after_success:
   - npm run coverage
   - npm install codeclimate-test-reporter
-  - codeclimate-test-reporter < coverage/lcov.info
+  - codeclimate-test-reporter < lcov.info
 
 # Pipe the coverage data to Code Climate
 after_script:
