@@ -13,7 +13,7 @@ env:
   global:
   - NODE_ENV=test
   - PGPORT=5432
-  - CC_TEST_REPORTER_ID=981b11035754d289a221f96a6ae4a2e56a73fa762bd02627919601abc146f0fa
+  - CC_TEST_REPORTER_ID=65b72f707c8d369dce5a768f462740a839b197ca149da4c197dddebcac2fa0ca
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -30,7 +30,6 @@ after_success:
   - npm install codeclimate-test-reporter
   - codeclimate-test-reporter < coverage/lcov.info
 
-after_script:
   - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.backend.json coverage/backend/.resultset.json # Format backend coverage
   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info  # Format frontend coverage
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
