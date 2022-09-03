@@ -13,8 +13,12 @@ env:
   global:
   - NODE_ENV=test
   - PGPORT=5432
+  - CC_TEST_REPORTER_ID=981b11035754d289a221f96a6ae4a2e56a73fa762bd02627919601abc146f0fa
 
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   - psql -c 'create database bean_blog_db_test;' -U postgres
   - npm run build
   - npm install -g sequelize-cli
@@ -23,3 +27,9 @@ script:
   - npm test
 after_success:
   - npm run coverage
+
+after_script:
+  - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.backend.json coverage/backend/.resultset.json # Format backend coverage
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info  # Format frontend coverage
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
