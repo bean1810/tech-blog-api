@@ -25,6 +25,7 @@ class AuthorsService {
 
             if (authorToUpdate) {
                 AuthorsService.updateAuthor(id, updateAuthor);
+                return updateAuthor;
             }
             return null;
         } catch (error) {
@@ -48,7 +49,7 @@ class AuthorsService {
                 where: { author_id: Number(id) }
             });
 
-            return theAuthor;
+            return theAuthor || null;
         } catch (error) {
             throw error;
         }

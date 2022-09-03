@@ -11,7 +11,7 @@ class AuthorController {
             if (allAuthors.length > 0) {
                 responseUtils.setSuccess(200, 'Authors retrieved', allAuthors);
             } else {
-                responseUtils.setSuccess(200, 'No Author found');
+                responseUtils.setSuccess(200, 'No Author found', allAuthors);
             }
             return responseUtils.send(res);
         } catch (error) {
