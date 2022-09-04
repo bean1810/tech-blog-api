@@ -14,6 +14,7 @@ env:
   - NODE_ENV=test
   - PGPORT=5432
   - CC_TEST_REPORTER_ID=65b72f707c8d369dce5a768f462740a839b197ca149da4c197dddebcac2fa0ca
+  - CODECLIMATE_REPO_TOKEN=630cde5eb5a06165df00a676
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
