@@ -27,7 +27,3 @@ script:
   - npm test
 after_success:
   - npm run coverage
-
-# Pipe the coverage data to Code Climate
-after_script:
- - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
