@@ -1,12 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import authorsRoutes from './server/routes/AuthorsRoutes';
+import categoryRoutes from './server/routes/CategoryRoutes';
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 const port = process.env.PORT || 3000;
 
 app.use('/api/v1/authors', authorsRoutes);
+app.use('/api/v1/category', categoryRoutes)
 
 // when a random route is inputed
 app.get('*', (req, res) => res.status(200).send({

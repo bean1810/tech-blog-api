@@ -8,7 +8,7 @@ class AuthorController {
     static async getAllAuthors(req, res) {
         try {
             const allAuthors = await AuthorsService.getAllAuthors();
-            if (allAuthors.length > 0) {
+            if (allAuthors.length) {
                 responseUtils.setSuccess(200, 'Authors retrieved', allAuthors);
             } else {
                 responseUtils.setSuccess(200, 'No Author found', allAuthors);
