@@ -183,7 +183,7 @@ describe('Testing the Authors endpoint', () => {
             .end((error, response) => {
                 expect(response.status).to.equal(400);
                 expect(response.body.message).to.be.a('string');
-                expect(response.body.message).to.equal('Please provide a numeric value')
+                expect(response.body.message).to.equal('Please input a valid numeric value')
                 done();
             })
     });

@@ -14,18 +14,13 @@ class CategoryController {
 
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(400, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
     static async getCategoryByName(req, res) {
         const { name } = req.params;
-
-        if (!isNaN(name)) {
-            responseUtils.setError(400, 'Category name must be a string');
-            return responseUtils.send(res);
-        }
+        if (!isNaN(name)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Category name must be a string');
 
         try {
             const category = await CategoryService.getCategoryByName(name);
@@ -34,8 +29,7 @@ class CategoryController {
 
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(400, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
@@ -48,32 +42,24 @@ class CategoryController {
     }
 
     static async createSingleCategory(req, res) {
-        if (!ObjectUtils.isObjectNotEmpty(req.body)) {
-            responseUtils.setError(400, 'Please provide complete details');
-            return responseUtils.send(res);
-        }
+        if (!ObjectUtils.isObjectNotEmpty(req.body)) return responseUtils.sendResponseErrorWhenRequestInvalid(res);
         try {
             const createdCategory = await CategoryService.createCategory(req.body);
             responseUtils.setSuccess(200, 'Category Added Successfully', createdCategory);
             return responseUtils.send(res)
         } catch (error) {
-            responseUtils.setError(400, error.message);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
     static async createListCategory(req, res) {
-        if (!ObjectUtils.isArrayObjectEmpty(req.body)) {
-            responseUtils.setError(400, 'Please provide complete details');
-            return responseUtils.send(res);
-        }
+        if (!ObjectUtils.isArrayObjectEmpty(req.body)) return responseUtils.sendResponseErrorWhenRequestInvalid(res);
         try {
             const createdCategory = await CategoryService.createMultipleCategories(req.body);
             responseUtils.setSuccess(200, 'Category Added Successfully', createdCategory);
             return responseUtils.send(res)
         } catch (error) {
-            responseUtils.setError(400, error.message);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 }

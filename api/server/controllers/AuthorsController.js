@@ -15,16 +15,13 @@ class AuthorController {
             }
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(400, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
     static async upsertAuthor(req, res) {
-        if (!ObjectUtils.isObjectNotEmpty(req.body)) {
-            responseUtils.setError(400, 'Please provide complete details');
-            return responseUtils.send(res);
-        }
+        if (!ObjectUtils.isObjectNotEmpty(req.body)) return responseUtils.sendResponseErrorWhenRequestInvalid(res);
+
         try {
             const isAuthorExist = await AuthorsService.getOneAuthor(req.body.author_id);
             if (isAuthorExist) {
@@ -33,8 +30,7 @@ class AuthorController {
                 AuthorController.addAuthor(req, res);
             }
         } catch (error) {
-            responseUtils.setError(400, error.message);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
 
     }
@@ -46,8 +42,7 @@ class AuthorController {
             responseUtils.setSuccess(201, 'Author Added!', createdAuthor);
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(400, error.message);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
@@ -59,18 +54,15 @@ class AuthorController {
             responseUtils.setSuccess(200, 'Author updated', updateAuthor);
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(404, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
     static async fincAuthorToUpdate(req, res) {
         const alteredAuthor = req.body;
         const { id } = !ObjectUtils.isEmpty(req.params) ? req.params : { id: req.body.author_id };
-        if (!Number(id)) {
-            responseUtils.setError(400, 'Please input a valid numeric value');
-            return responseUtils.send(res);
-        }
+        if (!Number(id)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Please input a valid numeric value');
+
         try {
             const updateAuthor = await AuthorsService.findAuthorToUpdate(id, alteredAuthor);
             if (!updateAuthor) {
@@ -80,18 +72,13 @@ class AuthorController {
             }
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(404, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
     static async getAAuthor(req, res) {
         const { id } = req.params;
-
-        if (!Number(id)) {
-            responseUtils.setError(400, 'Please input a valid numeric value');
-            return responseUtils.send(res);
-        }
+        if (!Number(id)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Please input a valid numeric value');
 
         try {
             const theAuthor = await AuthorsService.getOneAuthor(id);
@@ -103,18 +90,13 @@ class AuthorController {
             }
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(404, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 
     static async deleteAuthor(req, res) {
         const { id } = req.params;
-
-        if (!Number(id)) {
-            responseUtils.setError(400, 'Please provide a numeric value');
-            return responseUtils.send(res);
-        }
+        if (!Number(id)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Please input a valid numeric value');
 
         try {
             const authorToDelete = await AuthorsService.deleteAuthor(id);
@@ -126,8 +108,7 @@ class AuthorController {
             }
             return responseUtils.send(res);
         } catch (error) {
-            responseUtils.setError(400, error);
-            return responseUtils.send(res);
+            return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
         }
     }
 }

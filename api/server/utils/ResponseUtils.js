@@ -34,4 +34,9 @@ export default class ResponseUtil {
             message: this.message,
         });
     }
+
+    sendResponseErrorWhenRequestInvalid(response, statusCode = 400, message = 'Please provide complete details') {
+        this.setError(statusCode, message)
+        return this.send(response);
+    }
 }
