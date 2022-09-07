@@ -1,7 +1,6 @@
 import CategoryService from '../services/CategoryService';
 import ResponseUtils from '../utils/ResponseUtils';
 import ObjectUtils from '../utils/ObjectUtils';
-import e from 'express';
 
 const responseUtils = new ResponseUtils();
 
@@ -20,8 +19,6 @@ class CategoryController {
 
     static async getCategoryByName(req, res) {
         const { name } = req.params;
-        if (!isNaN(name)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Category name must be a string');
-
         try {
             const category = await CategoryService.getCategoryByName(name);
             const responseMessage = category.length ? 'Found Category' : 'No Category Found';

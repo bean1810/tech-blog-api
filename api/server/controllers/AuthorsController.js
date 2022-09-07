@@ -20,8 +20,6 @@ class AuthorController {
     }
 
     static async upsertAuthor(req, res) {
-        if (!ObjectUtils.isObjectNotEmpty(req.body)) return responseUtils.sendResponseErrorWhenRequestInvalid(res);
-
         try {
             const isAuthorExist = await AuthorsService.getOneAuthor(req.body.author_id);
             if (isAuthorExist) {
@@ -78,7 +76,6 @@ class AuthorController {
 
     static async getAAuthor(req, res) {
         const { id } = req.params;
-        if (!Number(id)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Please input a valid numeric value');
 
         try {
             const theAuthor = await AuthorsService.getOneAuthor(id);
@@ -96,7 +93,6 @@ class AuthorController {
 
     static async deleteAuthor(req, res) {
         const { id } = req.params;
-        if (!Number(id)) return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'Please input a valid numeric value');
 
         try {
             const authorToDelete = await AuthorsService.deleteAuthor(id);
