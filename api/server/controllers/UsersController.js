@@ -24,10 +24,10 @@ class UsersController {
 
     static async createUser(req, res, next) {
         const newUser = req.body;
-
+        newUser.password = bcryptjs.hashSync(newUser.password, 10);
         try {
             const createdUser = await UserService.createUser(newUser);
-            responseUtils.setSuccess(200, 'Users created successfully', createdUser);
+            responseUtils.setSuccess(200, 'User created successfully', createdUser);
             return responseUtils.send(res);
         } catch (error) {
             return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, error.message);
@@ -38,7 +38,7 @@ class UsersController {
         const userName = req.body.userName;
         const password = req.body.password;
         try {
-            const user = await UserService.authenticate(userName);
+            const user = await UserService.findUser(userName);
             if (!user) {
                 return responseUtils.sendResponseErrorWhenRequestInvalid(res, 400, 'User does not exist');
             }

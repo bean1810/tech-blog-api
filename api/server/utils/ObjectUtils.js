@@ -1,3 +1,5 @@
+let jwt = require('jsonwebtoken');
+require('dotenv').config();
 export default class ObjectUtils {
 
     static isObjectNotEmpty(obj) {
@@ -20,5 +22,20 @@ export default class ObjectUtils {
             if (!ObjectUtils.isObjectNotEmpty(obj)) return false;
         }
         return true;
+    }
+
+    static convertStringToArray(string, separator) {
+        return string.split(separator);
+    }
+
+    static extractToken(string) {
+        const findEqualCharacter = string.indexOf('=');
+        return string.slice(findEqualCharacter + 1);
+    }
+
+    static verifyToken(token) {
+        return jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
+            return error ? false : true;
+        })
     }
 }

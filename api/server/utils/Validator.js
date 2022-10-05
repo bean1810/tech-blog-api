@@ -19,4 +19,23 @@ export default class Validator {
         if (!ObjectUtils.isObjectNotEmpty(req.body)) return responseUtils.sendResponseErrorWhenRequestInvalid(res);
         next();
     }
+
+    static verifyToken(req, res, next) {
+        // let token = req.cookies.auth_tk
+        // if (!token) {
+        //     return res.status(401).send({
+        //         auth: false,
+        //         message: 'Invalid Authentication Token'
+        //     })
+        // }
+        // jwt.verify(token, secretKey, (err, decoded) => {
+        //     if (err) {
+        //         return res.status(500).send({
+        //             auth: false,
+        //             message: 'Failed to authenticate token.'
+        //         })
+        //     }
+        //     next();
+        // })
+    }
 }

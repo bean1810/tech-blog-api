@@ -18,10 +18,10 @@ class UserService {
         }
     }
 
-    static async authenticate(username) {
+    static async findUser(username) {
         try {
             const user = await database.Users.findOne({
-                where: { username: username }
+                where: { user_name: username }
             });
             return user || null;
         } catch (error) {
